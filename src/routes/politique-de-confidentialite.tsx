@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { canonicalUrl } from "../lib/site";
 
 export const Route = createFileRoute("/politique-de-confidentialite")({
   head: () => ({
@@ -8,9 +9,9 @@ export const Route = createFileRoute("/politique-de-confidentialite")({
       { property: "og:title", content: "Politique de confidentialité — GeniusFiles" },
       { property: "og:description", content: "Politique de confidentialité de l'application mobile GeniusFiles." },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "/politique-de-confidentialite" },
+      { property: "og:url", content: canonicalUrl("/politique-de-confidentialite") },
     ],
-    links: [{ rel: "canonical", href: "/politique-de-confidentialite" }],
+    links: [{ rel: "canonical", href: canonicalUrl("/politique-de-confidentialite") }],
   }),
   component: PrivacyPage,
 });
