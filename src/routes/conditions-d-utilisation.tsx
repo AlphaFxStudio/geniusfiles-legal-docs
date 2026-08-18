@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/conditions-d-utilisation")({
   head: () => ({
@@ -17,32 +17,26 @@ export const Route = createFileRoute("/conditions-d-utilisation")({
 
 function TermsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-5 py-10 sm:py-16">
-      <Link
-        to="/"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <span aria-hidden="true">←</span>
-        Retour à l'accueil
-      </Link>
+    <div className="mx-auto max-w-3xl px-5 pb-16 pt-8 sm:pt-12">
+      <header className="rounded-2xl border border-border/60 bg-card px-5 py-5 sm:px-6 sm:py-6">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-4xl">
+          Conditions d'utilisation
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Dernière mise à jour : 18/08/2026
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Contact :{" "}
+          <a
+            href="mailto:geniusfiles.contact@gmail.com"
+            className="font-medium text-primary underline decoration-1 underline-offset-2 hover:decoration-2"
+          >
+            geniusfiles.contact@gmail.com
+          </a>
+        </p>
+      </header>
 
-      <h1 className="mt-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-        Conditions d'utilisation
-      </h1>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Dernière mise à jour : 18/08/2026
-      </p>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Contact :{" "}
-        <a
-          href="mailto:geniusfiles.contact@gmail.com"
-          className="text-primary underline-offset-2 hover:underline"
-        >
-          geniusfiles.contact@gmail.com
-        </a>
-      </p>
-
-      <article className="prose-legal mt-8">
+      <article className="prose-legal mt-8 [content-visibility:auto] [contain-intrinsic-size:auto_1200px]">
         <p>
           Les présentes conditions d'utilisation régissent l'accès et
           l'utilisation de l'application mobile GeniusFiles (« GeniusFiles », «
