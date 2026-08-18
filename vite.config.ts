@@ -6,10 +6,32 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// GitHub Pages build: `GITHUB_PAGES=true vite build`
+// Produces a fully static, prerendered site served under the repo sub-path.
+// Lovable builds are untouched (the flag is only set by the GitHub Actions workflow).
+const isGithubPages = process.env["GITHUB_PAGES"] === "true";
+const base = process.env["GITHUB_PAGES_BASE"] ?? "/geniusfiles-legal-docs/";
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    ...(isGithubPages
+      ? {
+          prerender: { enabled: true, crawlLinks: true },
+          pages: [
+            { path: "/", prerender: { enabled: true } },
+            { path: "/politique-de-confidentialite", prerender: { enabled: true } },
+            { path: "/conditions-d-utilisation", prerender: { enabled: true } },
+          ],
+        }
+      : {}),
   },
+  ...(isGithubPages
+    ? {
+        nitro: { preset: "static" as const },
+        vite: { base },
+      }
+    : {}),
 });
