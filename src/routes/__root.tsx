@@ -125,7 +125,7 @@ function Header() {
   const docTitle = DOC_TITLES[pathname];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-5 py-3 sm:py-4">
         <Link to="/" className="flex min-w-0 shrink-0 items-center gap-3">
           <img
