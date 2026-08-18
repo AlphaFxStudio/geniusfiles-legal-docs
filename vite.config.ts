@@ -30,7 +30,8 @@ export default defineConfig({
   },
   ...(isGithubPages
     ? {
-        nitro: { preset: "static" as const },
+        // No server deploy target: GitHub Pages only serves static files.
+        nitro: false as const,
         vite: { base },
       }
     : {}),
