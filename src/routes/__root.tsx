@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { asset, canonicalUrl } from "../lib/site";
 
 function NotFoundComponent() {
   return (
@@ -84,13 +85,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "GeniusFiles — Informations légales" },
       { property: "og:description", content: "Espace officiel des informations légales de GeniusFiles." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: canonicalUrl("/") },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@GeniusFiles" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "icon", type: "image/png", href: asset("favicon.png") },
     ],
   }),
   shellComponent: RootShell,
@@ -129,7 +130,7 @@ function Header() {
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-5 py-3 sm:py-4">
         <Link to="/" className="flex min-w-0 shrink-0 items-center gap-3">
           <img
-            src="/logo.png"
+            src={asset("logo.png")}
             alt="GeniusFiles"
             width={40}
             height={40}
