@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -112,49 +113,61 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const DOC_TITLES: Record<string, string> = {
+  "/politique-de-confidentialite": "Politique de confidentialité",
+  "/conditions-d-utilisation": "Conditions d'utilisation",
+};
+
 function Header() {
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname.replace(/\/+$/, "") || "/",
+  });
+  const docTitle = DOC_TITLES[pathname];
+
   return (
-    <header className="w-full border-b border-border/50 bg-card/50 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
-        <Link to="/" className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-5 py-3 sm:py-4">
+        <Link to="/" className="flex min-w-0 shrink-0 items-center gap-3">
           <img
             src="/logo.png"
             alt="GeniusFiles"
-            className="h-10 w-10 rounded-xl"
+            width={40}
+            height={40}
+            decoding="async"
+            className="h-9 w-9 rounded-xl sm:h-10 sm:w-10"
           />
-          <div className="flex flex-col">
+          <span className="flex flex-col">
             <span className="text-base font-semibold leading-tight text-foreground">
               GeniusFiles
             </span>
-            <span className="text-xs leading-tight text-muted-foreground">
-              Informations légales
-            </span>
-          </div>
+            {!docTitle && (
+              <span className="text-xs leading-tight text-muted-foreground">
+                Informations légales
+              </span>
+            )}
+          </span>
         </Link>
-        <nav className="hidden items-center gap-4 text-sm sm:flex">
-          <Link
-            to="/"
-            activeProps={{ className: "font-semibold text-foreground" }}
-            inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-            activeOptions={{ exact: true }}
-          >
-            Accueil
-          </Link>
-          <Link
-            to="/politique-de-confidentialite"
-            activeProps={{ className: "font-semibold text-foreground" }}
-            inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-          >
-            Confidentialité
-          </Link>
-          <Link
-            to="/conditions-d-utilisation"
-            activeProps={{ className: "font-semibold text-foreground" }}
-            inactiveProps={{ className: "text-muted-foreground hover:text-foreground" }}
-          >
-            Conditions
-          </Link>
-        </nav>
+
+        {docTitle ? (
+          <span className="min-w-0 truncate text-right text-xs font-medium text-muted-foreground sm:text-sm">
+            {docTitle}
+          </span>
+        ) : (
+          <nav className="hidden items-center gap-4 text-sm sm:flex">
+            <Link
+              to="/politique-de-confidentialite"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Confidentialité
+            </Link>
+            <Link
+              to="/conditions-d-utilisation"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Conditions
+            </Link>
+          </nav>
+        )}
       </div>
     </header>
   );
