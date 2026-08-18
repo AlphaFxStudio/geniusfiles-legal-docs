@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { canonicalUrl } from "../lib/site";
 
 export const Route = createFileRoute("/conditions-d-utilisation")({
   head: () => ({
@@ -8,9 +9,9 @@ export const Route = createFileRoute("/conditions-d-utilisation")({
       { property: "og:title", content: "Conditions d'utilisation — GeniusFiles" },
       { property: "og:description", content: "Conditions d'utilisation de l'application mobile GeniusFiles." },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: "/conditions-d-utilisation" },
+      { property: "og:url", content: canonicalUrl("/conditions-d-utilisation") },
     ],
-    links: [{ rel: "canonical", href: "/conditions-d-utilisation" }],
+    links: [{ rel: "canonical", href: canonicalUrl("/conditions-d-utilisation") }],
   }),
   component: TermsPage,
 });

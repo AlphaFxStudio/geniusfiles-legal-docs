@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { asset, canonicalUrl } from "../lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -7,9 +8,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Espace officiel des informations légales de GeniusFiles." },
       { property: "og:title", content: "GeniusFiles — Informations légales" },
       { property: "og:description", content: "Espace officiel des informations légales de GeniusFiles." },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: canonicalUrl("/") },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: canonicalUrl("/") }],
   }),
   component: Index,
 });
@@ -19,7 +20,7 @@ function Index() {
     <div className="flex flex-col items-center justify-center px-5 py-16 sm:py-24">
       <div className="flex max-w-md flex-col items-center text-center">
         <img
-          src="/logo.png"
+          src={asset("logo.png")}
           alt="GeniusFiles"
           className="h-24 w-24 rounded-3xl shadow-lg shadow-primary/10"
         />
